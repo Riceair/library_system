@@ -74,6 +74,18 @@ body {
   cursor: pointer;
 }
 
+#search_section{
+  margin-bottom: 1.5%;
+}
+
+#dropdown_section{
+  margin-right: 0.5%;
+}
+
+.dropdown-item:hover{
+  cursor: pointer;
+}
+
 .book_name{
   margin-bottom: 0.5%;
 }
@@ -81,4 +93,8 @@ body {
 .book_other{
   margin: auto;
   text-align: center;
+}
+
+.hidden{
+  display: none;
 }
