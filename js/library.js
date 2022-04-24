@@ -43,6 +43,9 @@ for(let i=0;i<book_list.length;i++){
             }
             else{ //當前的書為其他人借的
                 book_item = notifyreturn_template.cloneNode(true)
+                book_item.querySelector(".btn").addEventListener('click',function(){ //click 執行BookNotify.php(還書)
+                    document.location.href="../php/BookNotify.php?bid="+borrowed_bid
+                })
             }
         }
         else{ //當前的書沒有被借閱
