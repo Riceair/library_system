@@ -7,7 +7,9 @@ for(let i=0;i<mode_btns.length;i++){
 }
 
 //登出按鈕
-
+document.getElementById("sign_out").addEventListener('click',function(){
+    document.location.href="../php/SignOut.php"
+})
 
 //Mode
 if(parseInt(mode)===SEARCH_MODE){
