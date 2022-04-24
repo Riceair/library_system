@@ -24,29 +24,39 @@ let notborrow_template = document.querySelector(".NotBorrowed") //尚未借閱�
 let borrowed_template = document.querySelector(".Borrowed") //已借閱的樣板(自己借的)
 let notifyreturn_template = document.querySelector(".NotifyReturn") //別人借的樣板
 let borrowed_id_list = [] //紀錄被借閱書的book_id
-for(let borrowed_inf in borrowed_list){
-    borrowed_id_list.push(borrowed_inf[BORROWED_BOOK_ID])
+for(let i=0;i<borrowed_list.length;i++){ //紀錄被借閱書的book_id
+    borrowed_id_list.push(borrowed_list[i][BORROWED_BOOK_ID])
 }
 
 for(let i=0;i<book_list.length;i++){
     let book_item
     if(borrowed_list!==null){ //有書被借閱
         if(borrowed_id_list.includes(book_list[i][BOOK_ID_IDX])){ //當前的書為"被借閱的書"
-            let borrowed_idx = borrowed_id_list.indexOf(book_list[i][BOOK_ID_IDX])
-            let borrow_account = borrowed_list[borrowed_idx][BORROWED_ACCOUNT]
+            let borrowed_idx = borrowed_id_list.indexOf(book_list[i][BOOK_ID_IDX]) //"被借閱的書"的書id
+            let borrowed_bid = borrowed_list[borrowed_idx][BORROWED_ID] //"被借閱的書"的借書紀錄(borrow_list)的id
+            let borrow_account = borrowed_list[borrowed_idx][BORROWED_ACCOUNT] //借書的帳號
             if(borrow_account===user_account){ //當前的書為使用者(本人)借的
                 book_item = borrowed_template.cloneNode(true)
+                book_item.querySelector(".btn").addEventListener('click',function(){ //click 執行BookReturn.php(還書)
+                    document.location.href="../php/BookReturn.php?bid="+borrowed_bid
+                })
             }
             else{ //當前的書為其他人借的
-                book_item = borrowed_template.cloneNode(true)
+                book_item = notifyreturn_template.cloneNode(true)
             }
         }
-        else{
-            book_item = notifyreturn_template.cloneNode(true)
+        else{ //當前的書沒有被借閱
+            book_item = notborrow_template.cloneNode(true)
+            book_item.querySelector(".btn").addEventListener('click',function(){ //click 執行BookBorrow.php(借書)
+                document.location.href="../php/BookBorrow.php?book_id="+book_list[i][BOOK_ID_IDX]
+            })
         }
     }
     else{ //沒有書被借閱
         book_item = notborrow_template.cloneNode(true)
+        book_item.querySelector(".btn").addEventListener('click',function(){ //click 執行BookBorrow.php(借書)
+            document.location.href="../php/BookBorrow.php?book_id="+book_list[i][BOOK_ID_IDX]
+        })
     }
     
     book_item.querySelector(".book_name").textContent = book_list[i][BOOK_NAME_IDX] //設定書名

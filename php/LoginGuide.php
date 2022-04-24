@@ -1,6 +1,6 @@
 <?php
     session_start();
-
+    include("connectDB.php");
     include("util.php");
     $account = $_POST["account"];
     $pwd = $_POST["pwd"];

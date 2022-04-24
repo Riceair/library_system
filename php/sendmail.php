@@ -2,10 +2,6 @@
 	header('P3P: CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"');
     require_once('./PHPMailer/PHPMailerAutoload.php');
 	function sendmail($whoborrow,$book){
-		include("conn_mysql.php");
-		$inquiry_mail = "SELECT email FROM lablist WHERE name = '".$whoborrow."'";
-		$inquiry_result = mysqli_query($db_link,$inquiry_mail);
-		$email = mysqli_fetch_array($inquiry_result);
 		
  		$mail= new PHPMailer();							//建立新物件
 		$mail->SMTPDebug = 0;                        
@@ -15,14 +11,14 @@
 		$mail->Host = "smtp.gmail.com";					//Gamil的SMTP主機
 		$mail->Port = 465;								//Gamil的SMTP主機的埠號(Gmail為465)。
 		$mail->CharSet = "utf-8";						//郵件編碼
-		$mail->Username = "m073040000@gmail.com";		//Gamil帳號
-		$mail->Password = "m073040000";					//Gmail密碼
-		$mail->From = "root@cse.db.nsysu.edu.tw";		//寄件者信箱
+		$mail->Username = "handytest00095@gmail.com";		//Gamil帳號
+		$mail->Password = "****";				//Gmail密碼
+		$mail->From = "handytest00095@gmail.com";		//寄件者信箱
 		$mail->FromName = "實驗室圖書館裡系統";			//寄件者姓名
 		$mail->Subject ="提醒還書通知"; 				//郵件標題
 		$mail->Body = "你借閱的書籍: ".$book."，有人要借閱請盡快歸還。"; //郵件內容
 		$mail->IsHTML(false);							//郵件內容為html
-		$mail->AddAddress("$email[0]");					//收件者郵件及名稱
+		$mail->AddAddress("dih0687@gmail.com");					//收件者郵件及名稱
 		if(!$mail->Send()){
 			echo "Error: " . $mail->ErrorInfo;
 		}else{

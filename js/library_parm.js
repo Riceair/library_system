@@ -17,5 +17,6 @@ const CAID = 0
 const CANAME = 1
 
 //從資料庫Query來的"被借閱的書"
-const BORROWED_BOOK_ID = 0
-const BORROWED_ACCOUNT = 1
+const BORROWED_ID = 0
+const BORROWED_BOOK_ID = 1
+const BORROWED_ACCOUNT = 2

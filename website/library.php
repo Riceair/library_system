@@ -7,7 +7,7 @@
         exit;
     }
 
-    include("../php/util.php");
+    include("../php/connectDB.php");
     $user_account = $_SESSION["account"];
     $user_name = $_SESSION["name"];
 
@@ -15,9 +15,9 @@
     $book_list = DBQueryAll("SELECT book.*, book_category.category
                              FROM book, book_category
                              WHERE book.book_caid=book_category.caid");
-    $borrowed_list = DBQueryAll("SELECT book_id, borrow_account
+    $borrowed_list = DBQueryAll("SELECT bid, book_id, borrow_account
                                  FROM borrow_list
-                                 WHERE return_list is NULL");
+                                 WHERE return_date is NULL");
 ?>
 
 <script> //傳送資料給js
