@@ -20,3 +20,8 @@ const CANAME = 1
 const BORROWED_ID = 0
 const BORROWED_BOOK_ID = 1
 const BORROWED_ACCOUNT = 2
+
+//網頁MODE
+const SEARCH_MODE = 0
+const BORROWED_MODE = 1
+const MANAGE_MODE = 2

@@ -12,19 +12,17 @@
 		$mail->Port = 465;								//Gamil的SMTP主機的埠號(Gmail為465)。
 		$mail->CharSet = "utf-8";						//郵件編碼
 		$mail->Username = "handytest00095@gmail.com";		//Gamil帳號
-		$mail->Password = "****";				//Gmail密碼
+		$mail->Password = "***";				//Gmail密碼
 		$mail->From = "handytest00095@gmail.com";		//寄件者信箱
 		$mail->FromName = "實驗室圖書館裡系統";			//寄件者姓名
 		$mail->Subject ="提醒還書通知"; 				//郵件標題
 		$mail->Body = "你借閱的書籍: ".$book."，有人要借閱請盡快歸還。"; //郵件內容
 		$mail->IsHTML(false);							//郵件內容為html
-		$mail->AddAddress("dih0687@gmail.com");					//收件者郵件及名稱
+		$mail->AddAddress("$whoborrow");					//收件者郵件及名稱
 		if(!$mail->Send()){
-			echo "Error: " . $mail->ErrorInfo;
+			return false;
 		}else{
-			echo "<div align = 'center'><h5><font color='#008800'><b>Send to ";
-			echo $whoborrow;
-			echo " Completed!</b></font></h5></div>";
+			return true;
 		}
     }
 	
@@ -38,9 +36,9 @@
 		$mail->Host = "smtp.gmail.com";					//Gamil的SMTP主機
 		$mail->Port = 465;								//Gamil的SMTP主機的埠號(Gmail為465)。
 		$mail->CharSet = "utf-8";						//郵件編碼
-		$mail->Username = "m073040000@gmail.com";		//Gamil帳號
-		$mail->Password = "m073040000";					//Gmail密碼
-		$mail->From = "root@cse.db.nsysu.edu.tw";		//寄件者信箱
+		$mail->Username = "handytest00095@gmail.com";		//Gamil帳號
+		$mail->Password = "***";				//Gmail密碼
+		$mail->From = "handytest00095@gmail.com";		//寄件者信箱
 		$mail->FromName = "實驗室圖書館裡系統";			//寄件者姓名
 		$mail->Subject ="新書上架通知"; 				//郵件標題
 		$mail->Body = "有新的圖書增加: ".$book."，有興趣的人歡迎來借閱。"; //郵件內容

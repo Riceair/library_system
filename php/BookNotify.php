@@ -16,10 +16,11 @@
 
     $result = DBQuery("SELECT book.book_name, user.user_email
                        FROM borrow_list, user, book
-                       WHERE borrow_list.bid=2 and borrow_list.borrow_account=user.user_account and
+                       WHERE borrow_list.bid=$bid and borrow_list.borrow_account=user.user_account and
                              borrow_list.book_id=book.book_id;");
     $book_name = $result[0];
     $borrow_email = $result[1];
+
     $send_result = sendmail($borrow_email, $book_name);
     if($send_result){
         echo "<script>alert('已通知');parent.location.href='../website/library.php'</script>";
