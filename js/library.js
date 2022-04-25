@@ -40,3 +40,8 @@ else if(parseInt(mode)===MANAGE_MODE){
         runDeleteMode()
     })
 }
+else if(parseInt(mode)===SETTING_MODE){
+    document.getElementById("SettingForm").classList.remove("hidden")
+    document.querySelectorAll(".nav-link")[SETTING_MODE].classList.add("active")
+    runSettingMode()
+}

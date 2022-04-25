@@ -7,10 +7,13 @@
         exit;
     }
 
+    include("../php/connectDB.php");
+
     $mode = $_GET["mode"];
     if($mode===NULL){
       $mode = "0";
     }
+
     // 搜尋處理 //
     if($mode==="0"){
       $search_str = $_GET["search"];
@@ -49,8 +52,11 @@
                               WHERE book.book_caid=book_category.caid";
     }
     // Section End //
+    elseif($mode==="3"){
+      $account = $_SESSION["account"];
+      $user_inf = DBQuery("SELECT * FROM user WHERE user_account='$account'");
+    }
 
-    include("../php/connectDB.php");
     $user_account = $_SESSION["account"];
     $user_name = $_SESSION["name"];
 
@@ -67,6 +73,7 @@
     const category_list = <?php echo json_encode($category_list) ?>;
     const book_list = <?php echo json_encode($book_list) ?>;
     const borrowed_list = <?php echo json_encode($borrowed_list) ?>;
+    const user_inf = <?php echo json_encode($user_inf) ?>;
 </script>
 
 <!doctype html>
@@ -143,7 +150,7 @@
 <main class="container">
     
 <div class="my-5 p-3 bg-body rounded shadow-sm" id="book_box">
-    <!-- Search Mode -->
+    <!--                                      Search Mode                                      -->
     <div class="d-flex hidden" id="search_section">
         <!-- 搜尋框 -->
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search_input">
@@ -202,10 +209,10 @@
       </div>
     </div>
 
-    <!-- Section End -->
+    <!--                                      Section End                                      -->
 
 
-    <!-- Borrowed Mode -->
+    <!--                                      Borrowed Mode                                      -->
     <!-- 借閱紀錄上面的column -->
     <div class="row mb-3 border-bottom hidden" id="BorrowListTitle">
       <div class="col-8 themed-grid-col"></div>
@@ -224,10 +231,10 @@
       <div class="col-2 themed-grid-col book_other">2022/1/2</div>
       <div class="col-2 themed-grid-col book_other">2022/1/2</div>
     </div>
-    <!-- Section End -->
+    <!--                                      Section End                                      -->
 
     
-    <!-- Manage Mode -->
+    <!--                                      Manage Mode                                      -->
     <!-- 管理書籍樣板(刪除) -->
     <div class="row mb-4 border-bottom hidden" id="MangeModeSwitch">
       <div class="col-8 themed-grid-col" id="MangeModeSwithGroup">
@@ -286,7 +293,43 @@
         <button type="button" class="btn btn-danger">刪除</button>
       </div>
     </div>
-    <!-- Section End -->
+    <!--                                      Section End                                      -->
+
+    <!--                                      Setting Mode                                      -->
+    <form class="needs-validation hidden" id="SettingForm" method="post" action="../php/SettingUpdate.php">
+        <div class="row g-3 mb-5">
+
+          <div class="col-12">
+            <label class="form-label">使用者名稱</label>
+            <input type="text" class="form-control" placeholder="使用者名稱" name="user_name">
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">使用者帳號</label>
+            <input type="text" class="form-control" placeholder="使用者帳號" name="user_account" readonly="true" required>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">使用者密碼</label>
+            <input type="password" class="form-control" placeholder="使用者密碼" name="user_pwd" required>
+          </div>
+
+          <div class="col-12">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" placeholder="you@example.com" name="user_email" required>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">電話</label>
+            <input type="text" pattern="\d*" maxlength="10" class="form-control" placeholder="電話" name="user_phone" required>
+          </div>
+
+
+        </div>
+
+        <button class="w-100 btn btn-primary btn-lg" type="submit">修改資料</button>
+      </form>
+    <!--                                      Section End                                      -->
 
     <div id="NoData" class="hidden"><h4>No Data</h4></div>
 </div>
@@ -298,6 +341,7 @@
     <script src="../js/library_search.js"></script>
     <script src="../js/library_borrowed.js"></script>
     <script src="../js/library_manage.js"></script>
+    <script src="../js/library_setting.js"></script>
     <script src="../js/library.js"></script>
   </body>
 </html>

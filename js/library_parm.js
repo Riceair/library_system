@@ -29,3 +29,4 @@ const BORROWED_ACCOUNT = 2
 const SEARCH_MODE = 0
 const BORROWED_MODE = 1
 const MANAGE_MODE = 2
+const SETTING_MODE = 3
