@@ -33,6 +33,15 @@
       }
     }
     // Section End //
+    // 借閱紀錄查詢 //
+    elseif($mode==="1"){
+      $account = $_SESSION["account"];
+      $book_list_query_str = "SELECT book.*, book_category.category, bid, borrow_date, return_date
+                              FROM borrow_list, book, book_category
+                              WHERE borrow_list.borrow_account='$account' AND borrow_list.book_id=book.book_id AND
+                                    book.book_caid=book_category.caid";
+    }
+    // Section End //
     // 新增內容 //
     elseif($mode==="2"){
       $book_list_query_str = "SELECT book.*, book_category.category
@@ -107,16 +116,16 @@
     <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="#">Search</a>
+          <a class="nav-link" href="#">搜尋書籍</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Borrowed</a>
+          <a class="nav-link" href="#">借閱紀錄</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Manage</a>
+          <a class="nav-link" href="#">管理書籍</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Setting</a>
+          <a class="nav-link" href="#">設定</a>
         </li>
       </ul>
       <!-- <form class="d-flex">
@@ -195,8 +204,29 @@
 
     <!-- Section End -->
 
-    <div id="NoData" class="hidden"><h4>No Data</h4></div>
 
+    <!-- Borrowed Mode -->
+    <!-- 借閱紀錄上面的column -->
+    <div class="row mb-3 border-bottom hidden" id="BorrowListTitle">
+      <div class="col-8 themed-grid-col"></div>
+      <div class="col-2 themed-grid-col book_other">借閱時間</div>
+      <div class="col-2 themed-grid-col book_other">歸還時間</div>
+    </div>
+
+    <!-- 借閱紀錄樣板 -->
+    <div class="row mb-3 border-bottom hidden BorrowReturn">
+      <div class="col-8 themed-grid-col">
+          <div class="book_name">
+          書名
+          </div>
+          <div class="book_more">作者:  出版項:[高雄市] : 撰者, 民110[2021] 類別:深度學習</div>
+        </div>
+      <div class="col-2 themed-grid-col book_other">2022/1/2</div>
+      <div class="col-2 themed-grid-col book_other">2022/1/2</div>
+    </div>
+    <!-- Section End -->
+
+    
     <!-- Manage Mode -->
     <!-- 管理書籍樣板(刪除) -->
     <div class="row mb-4 border-bottom hidden" id="MangeModeSwitch">
@@ -257,6 +287,8 @@
       </div>
     </div>
     <!-- Section End -->
+
+    <div id="NoData" class="hidden"><h4>No Data</h4></div>
 </div>
 </main>
 
@@ -264,6 +296,7 @@
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="../js/library_parm.js"></script>
     <script src="../js/library_search.js"></script>
+    <script src="../js/library_borrowed.js"></script>
     <script src="../js/library_manage.js"></script>
     <script src="../js/library.js"></script>
   </body>

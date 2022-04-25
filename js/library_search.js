@@ -30,8 +30,10 @@ function runSearchMode(){
     let borrowed_template = document.querySelector(".Borrowed") //已借閱的樣板(自己借的)
     let notifyreturn_template = document.querySelector(".NotifyReturn") //別人借的樣板
     let borrowed_id_list = [] //紀錄被借閱書的book_id
-    for(let i=0;i<borrowed_list.length;i++){ //紀錄被借閱書的book_id
-        borrowed_id_list.push(borrowed_list[i][BORROWED_BOOK_ID])
+    if(borrowed_list!==null){
+        for(let i=0;i<borrowed_list.length;i++){ //紀錄被借閱書的book_id
+            borrowed_id_list.push(borrowed_list[i][BORROWED_BOOK_ID])
+        }
     }
 
     if(book_list!==null){

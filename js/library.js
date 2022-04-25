@@ -17,6 +17,11 @@ if(parseInt(mode)===SEARCH_MODE){
     document.querySelectorAll(".nav-link")[SEARCH_MODE].classList.add("active")
     runSearchMode()
 }
+else if(parseInt(mode)===BORROWED_MODE){
+    document.getElementById("BorrowListTitle").classList.remove("hidden")
+    document.querySelectorAll(".nav-link")[BORROWED_MODE].classList.add("active")
+    runBorrowedMode()
+}
 else if(parseInt(mode)===MANAGE_MODE){
     document.getElementById("MangeModeSwitch").classList.remove("hidden")
     document.querySelectorAll(".nav-link")[MANAGE_MODE].classList.add("active")

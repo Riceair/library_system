@@ -10,6 +10,10 @@ const BOOK_NAME_IDX = 2
 const PUB_IDX = 3
 const BOOK_CAID_IDX = 4
 const BOOK_CANAME_IDX = 5
+//借閱紀錄多的欄位
+const BORROW_BID_IDX = 6
+const BORROW_DATE_IDX = 7
+const RETURN_DATE_IDX = 8
 
 //從資料庫Query來的類別
 // SELECT * FROM book_category
