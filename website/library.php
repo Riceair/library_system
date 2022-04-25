@@ -33,6 +33,13 @@
       }
     }
     // Section End //
+    // 新增內容 //
+    elseif($mode==="2"){
+      $book_list_query_str = "SELECT book.*, book_category.category
+                              FROM book, book_category
+                              WHERE book.book_caid=book_category.caid";
+    }
+    // Section End //
 
     include("../php/connectDB.php");
     $user_account = $_SESSION["account"];
@@ -127,7 +134,7 @@
 <main class="container">
     
 <div class="my-5 p-3 bg-body rounded shadow-sm" id="book_box">
-    
+    <!-- Search Mode -->
     <div class="d-flex hidden" id="search_section">
         <!-- 搜尋框 -->
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search_input">
@@ -186,7 +193,70 @@
       </div>
     </div>
 
+    <!-- Section End -->
+
     <div id="NoData" class="hidden"><h4>No Data</h4></div>
+
+    <!-- Manage Mode -->
+    <!-- 管理書籍樣板(刪除) -->
+    <div class="row mb-4 border-bottom hidden" id="MangeModeSwitch">
+      <div class="col-8 themed-grid-col" id="MangeModeSwithGroup">
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-outline-primary active">新增</button>
+          <button type="button" class="btn btn-outline-primary">刪除</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 新增的書本 -->
+        <form class="needs-validation hidden" id="AddBookForm" method="post" action="../php/BookAdd.php">
+          <div class="row g-3 mb-5">
+
+            <div class="col-12">
+              <label class="form-label">作者</label>
+              <input type="text" class="form-control" id="add_author" placeholder="作者名稱" name="author" required>
+            </div>
+
+            <div class="col-12">
+              <label class="form-label">書名</label>
+              <input type="text" class="form-control" id="add_book_name" placeholder="書本名稱" name="book_name" required>
+            </div>
+
+            <div class="col-12">
+              <label class="form-label">出版項</label>
+              <input type="text" class="form-control" id="add_publication" placeholder="[高雄市] : 撰者, 民111[2022]" name="publication_item" required>
+            </div>
+
+            <!-- <div class="col-12">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="you@example.com">
+            </div> -->
+            <div class="col-md-5">
+              <label class="form-label">類別</label>
+              <select class="form-select" id="add_category" name="caname" required>
+                <option value="">Choose...</option>
+              </select>
+            </div>
+
+
+          </div>
+
+          <button class="w-100 btn btn-primary btn-lg" type="submit">確認新增</button>
+        </form>
+
+    <!-- 刪除的書本 -->
+    <div class="row mb-3 border-bottom hidden DeleteBook">
+      <div class="col-8 themed-grid-col">
+          <div class="book_name">
+          書名
+          </div>
+          <div class="book_more">作者:  出版項:[高雄市] : 撰者, 民110[2021] 類別:深度學習</div>
+        </div>
+      <div class="col-2 themed-grid-col book_other">
+        <button type="button" class="btn btn-danger">刪除</button>
+      </div>
+    </div>
+    <!-- Section End -->
 </div>
 </main>
 
@@ -194,6 +264,7 @@
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="../js/library_parm.js"></script>
     <script src="../js/library_search.js"></script>
+    <script src="../js/library_manage.js"></script>
     <script src="../js/library.js"></script>
   </body>
 </html>

@@ -45,11 +45,9 @@
 		$mail->IsHTML(false);							//郵件內容為html
 		$mail->AddAddress("$whoborrow");				//收件者郵件及名稱
 		if(!$mail->Send()){
-			echo "Error: " . $mail->ErrorInfo;
+			return false;
 		}else{
-			echo "<font color='#008800'><b>Send to ";
-			echo $whoborrow;
-			echo " completed.  </b></font>";
+			return true;
 		}
     }
 ?>

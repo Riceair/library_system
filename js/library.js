@@ -17,3 +17,21 @@ if(parseInt(mode)===SEARCH_MODE){
     document.querySelectorAll(".nav-link")[SEARCH_MODE].classList.add("active")
     runSearchMode()
 }
+else if(parseInt(mode)===MANAGE_MODE){
+    document.getElementById("MangeModeSwitch").classList.remove("hidden")
+    document.querySelectorAll(".nav-link")[MANAGE_MODE].classList.add("active")
+    
+    runAddMode() //先執行Add Mode
+
+    let switchBtns = document.getElementById("MangeModeSwithGroup").querySelectorAll(".btn")
+    switchBtns[0].addEventListener('click',function(){ //執行Add Mode
+        switchBtns[0].classList.add("active")
+        switchBtns[1].classList.remove("active")
+        runAddMode()
+    })
+    switchBtns[1].addEventListener('click',function(){ //執行Delete Mode
+        switchBtns[0].classList.remove("active")
+        switchBtns[1].classList.add("active")
+        runDeleteMode()
+    })
+}
