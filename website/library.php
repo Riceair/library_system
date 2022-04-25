@@ -301,7 +301,7 @@
 
           <div class="col-12">
             <label class="form-label">使用者名稱</label>
-            <input type="text" class="form-control" placeholder="使用者名稱" name="user_name">
+            <input type="text" class="form-control" placeholder="使用者名稱" name="user_name" required>
           </div>
 
           <div class="col-12">
