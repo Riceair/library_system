@@ -48,7 +48,9 @@ INSERT INTO `book` (`book_id`, `author`, `book_name`, `publication_item`, `book_
 (4, '許悅佳', '應用生成深度網路於類別遞增式學習(Applying Generative Deep Networks to Class-incremental Learning)', '[高雄市] : 撰者, 民110[2021]', 1),
 (5, '邱振嘉', '可篩除項目集之蛻變測試(Metamorphic Testing of Erasable-Itemset Mining)', '[高雄市] : 撰者, 民109[2020]', 0),
 (6, '張浩', '具時序特性之可篩除項目集探勘(Erasable Itemset Mining with the Temporal Property)', '[高雄市] : 撰者, 民110[2021]', 0),
-(7, '古孟平', '模糊平均效益資料探勘(Fuzzy Average-utility Data Mining)', '[高雄市] : 撰者, 民110[2021]', 0);
+(7, '古孟平', '模糊平均效益資料探勘(Fuzzy Average-utility Data Mining)', '[高雄市] : 撰者, 民110[2021]', 0),
+(9, 'Author', 'Book Name', '[高雄市] R~~', 0),
+(10, 'AuthorBM', 'New Book123', '[高市]', 2);
 
 -- --------------------------------------------------------
 
@@ -89,16 +91,10 @@ CREATE TABLE `borrow_list` (
 --
 
 INSERT INTO `borrow_list` (`bid`, `borrow_date`, `return_date`, `borrow_account`, `book_id`) VALUES
-(0, '2022-04-24 23:02:27', NULL, 'handy00095', 4),
-(1, '2022-04-24 23:08:05', '2022-04-25 02:18:51', 'handy00095', 7),
-(2, '2022-04-24 23:09:34', NULL, 'handy00095', 1),
-(3, '2022-04-24 23:11:31', NULL, 'handy00095', 6),
-(4, '2022-04-24 23:13:08', '2022-04-24 23:30:25', 'dih0687', 2),
-(5, '2022-04-24 23:14:57', '2022-04-24 23:30:27', 'dih0687', 5),
-(6, '2022-04-24 23:15:04', '2022-04-24 23:29:44', 'dih0687', 0),
-(7, '2022-04-24 23:39:56', '2022-04-24 23:39:59', 'dih0687', 3),
-(8, '2022-04-24 23:40:01', '2022-04-24 23:40:03', 'dih0687', 5),
-(9, '2022-04-25 02:19:07', '2022-04-25 02:45:23', 'dih0687', 0);
+(0, '2022-04-25 18:11:45', NULL, 'handy00095', 5),
+(2, '2022-04-25 18:15:08', NULL, 'dih0687', 1),
+(3, '2022-04-25 18:15:12', NULL, 'dih0687', 7),
+(4, '2022-04-25 21:47:42', '2022-04-25 21:49:21', 'dib', 10);
 
 -- --------------------------------------------------------
 
@@ -121,7 +117,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`user_name`, `user_account`, `user_pwd`, `user_email`, `user_phone`) VALUES
 ('王小明', 'handytest00095', 'handytestpwd', 'handytest00095@gmail.com', '0912345678'),
 ('李大華', 'handy00095', 'handypwd', 'handy00095@gmail.com', '0987654321'),
-('DiH', 'dih0687', 'dihpwd', 'dih0687@gmail.com', '0954698735');
+('DiH', 'dih0687', 'dihpwd', 'dih0687@gmail.com', '0954698735'),
+('Ambiguity', 'dib', 'dibpwd', 'handy00095@gmail.com', '0976842354');
 
 --
 -- 已傾印資料表的索引
