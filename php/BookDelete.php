@@ -8,5 +8,16 @@
     }
 
     $book_id = $_GET["book_id"];
-    echo $book_id;
+    
+    include("connectDB.php");
+    //刪除書本
+    DBQuery("DELETE
+             FROM book
+             WHERE book_id=$book_id");
+    //刪除相關的借閱紀錄
+    DBQuery("DELETE
+             FROM borrow_list
+             WHERE book_id=$book_id");
+
+    echo "<script>alert('刪除成功');parent.location.href='../website/library.php'</script>";
 ?>
