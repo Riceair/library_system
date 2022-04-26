@@ -9,17 +9,23 @@
 
     include("../php/connectDB.php");
 
-    $mode = $_GET["mode"];
-    if($mode===NULL){
-      $mode = "0";
+    $mode = "0";
+    if(isset($_GET["mode"])){
+      $mode = $_GET["mode"];
     }
 
     // 搜尋處理 //
     if($mode==="0"){
-      $search_str = $_GET["search"];
-      $select_category = $_GET["category"];
+      $search_str = "";
+      if(isset($_GET["search"])){
+        $search_str = $_GET["search"];
+      }
+      $select_category = "-1";
+      if(isset($_GET["category"])){
+        $select_category = $_GET["category"];
+      }
 
-      if($search_str===NULL || $search_str===""){ //沒有下搜尋
+      if($search_str===""){ //沒有下搜尋
         $book_list_query_str = "SELECT book.*, book_category.category
                                 FROM book, book_category
                                 WHERE book.book_caid=book_category.caid";
@@ -31,7 +37,7 @@
                                       OR book.author like '%$search_str%')";
       }
 
-      if($select_category!==NULL && $select_category!=="-1"){ //有限制類別
+      if($select_category!=="-1"){ //有限制類別
         $book_list_query_str = $book_list_query_str." AND book.book_caid=".$select_category;
       }
     }
