@@ -12,7 +12,7 @@
         echo "<script>alert('帳號已有人使用');parent.location.href='../website/register.html'</script>";
     }
     else{
-        DBQuery("INSERT
+        DBCommand("INSERT
                  INTO user
                  VALUES ('$user_name', '$user_account', '$user_pwd', '$user_email', '$user_phone')");
         echo "<script>alert('註冊完成');parent.location.href='../website/login.html'</script>";

@@ -9,6 +9,18 @@
 
     include("../php/connectDB.php");
 
+    $user_account = $_SESSION["account"];
+    $user_name = $_SESSION["name"];
+
+    //確認是否為管理員
+    error_reporting(0); //不要顯示沒查到東西
+    $manger_query = DBQuery("SELECT * FROM manager WHERE user_account='$user_account'")[0];
+    $isManger = FALSE;
+    if($manger_query !== NULL){
+      $isManger = TRUE;
+    }
+
+    
     $mode = "0";
     if(isset($_GET["mode"])){
       $mode = $_GET["mode"];
@@ -46,10 +58,9 @@
     // Section End //
     // 借閱紀錄查詢 //
     elseif($mode==="1"){
-      $account = $_SESSION["account"];
       $book_list_query_str = "SELECT book.*, book_category.category, bid, borrow_date, return_date
                               FROM borrow_list, book, book_category
-                              WHERE borrow_list.borrow_account='$account' AND borrow_list.book_id=book.book_id AND
+                              WHERE borrow_list.borrow_account='$user_account' AND borrow_list.book_id=book.book_id AND
                                     book.book_caid=book_category.caid";
     }
     // Section End //
@@ -61,12 +72,8 @@
     }
     // Section End //
     elseif($mode==="3"){
-      $account = $_SESSION["account"];
-      $user_inf = DBQuery("SELECT * FROM user WHERE user_account='$account'");
+      $user_inf = DBQuery("SELECT * FROM user WHERE user_account='$user_account'");
     }
-
-    $user_account = $_SESSION["account"];
-    $user_name = $_SESSION["name"];
 
     $category_list = DBQueryAll("SELECT * FROM book_category");
     $book_list = DBQueryAll($book_list_query_str);
@@ -76,6 +83,7 @@
 ?>
 
 <script> //傳送資料給js
+    const isManger = <?php echo json_encode($isManger) ?>;
     const mode = <?php echo json_encode($mode) ?>;
     const user_account = <?php echo json_encode($user_account) ?>;
     const category_list = <?php echo json_encode($category_list) ?>;
@@ -137,7 +145,7 @@
           <a class="nav-link" href="#">借閱紀錄</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">管理書籍</a>
+          <a class="nav-link hidden" href="#" id="manage_book_btn">管理書籍</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">設定</a>

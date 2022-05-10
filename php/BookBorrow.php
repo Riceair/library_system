@@ -20,7 +20,7 @@
         $bid += 1;
     }
 
-    DBQuery("INSERT
+    DBCommand("INSERT
              INTO borrow_list
              VALUES ($bid, '$current_time', NULL, '$account', $book_id)");
     echo "<script>alert('借閱成功');parent.location.href='../website/library.php'</script>";

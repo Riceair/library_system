@@ -1,3 +1,8 @@
+//管理員
+if(isManger){
+    document.getElementById("manage_book_btn").classList.remove("hidden")
+}
+
 //切換Mode按鈕
 let mode_btns = document.querySelectorAll(".nav-link")
 for(let i=0;i<mode_btns.length;i++){

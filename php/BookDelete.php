@@ -11,11 +11,11 @@
     
     include("connectDB.php");
     //刪除書本
-    DBQuery("DELETE
+    DBCommand("DELETE
              FROM book
              WHERE book_id=$book_id");
     //刪除相關的借閱紀錄
-    DBQuery("DELETE
+    DBCommand("DELETE
              FROM borrow_list
              WHERE book_id=$book_id");
 

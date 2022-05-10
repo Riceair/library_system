@@ -13,7 +13,7 @@
 
     include("connectDB.php");
 
-    DBQuery("UPDATE borrow_list
+    DBCommand("UPDATE borrow_list
              SET return_date='$current_time'
              WHERE bid=$bid");
     echo "<script>alert('歸還成功');parent.location.href='../website/library.php'</script>";

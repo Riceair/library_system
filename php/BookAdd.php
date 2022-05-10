@@ -29,7 +29,7 @@
         $book_id += 1;
     }
 
-    DBQuery("INSERT
+    DBCommand("INSERT
              INTO book
              VALUES ($book_id, '$author', '$book_name', '$publication_item', $caid)");
 

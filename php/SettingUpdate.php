@@ -14,7 +14,7 @@
     $user_phone = $_POST["user_phone"];
 
     include("../php/connectDB.php");
-    DBQuery("UPDATE user
+    DBCommand("UPDATE user
              SET user_name='$user_name', user_pwd='$user_pwd', user_email='$user_email', user_phone='$user_phone'
              WHERE user_account='$user_account'");
     $_SESSION["name"] = $user_name;
